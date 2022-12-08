@@ -27,25 +27,32 @@ class OrderParser
     public function source($fileName)
     {
         $this->dom->loadFromFile('storage/'.$fileName);
+
+        return $this;
     }
 
     public function parse()
     {
         $this->orderDetails();
 
+        return $this;
+    }
+
+    public function return()
+    {
         return [
             'tracking_number' => $this->trackingNumber,
             'po_number' => $this->PONumber,
-            'scheduled_time' => $this->formatTime($this->scheduledTime),
+            'scheduled_time' => $this->scheduledTime,
             'customer' => $this->customer,
             'trade' => $this->trade,
-            'nte' => $this->formatPrice($this->nte),
+            'nte' => $this->nte,
             'store_id' => $this->storeId,
             'address_street' => $this->addressStreet,
             'address_city' => $this->addressCity,
             'address_state' => $this->addressState,
             'address_zipcode' => $this->addressZipcode,
-            'phone' => $this->formatPhone($this->phone)
+            'phone' => $this->phone
         ];
     }
 
@@ -74,52 +81,52 @@ class OrderParser
     {
         $this->trackingNumber = $this->getTrackingNumber();
         $this->PONumber = $this->getPONumber();
-        $this->scheduledTime = $this->getScheduledTime();
+        $this->scheduledTime = $this->formatTime($this->getScheduledTime());
         $this->customer = $this->getCustomer();
         $this->trade = $this->getTrade();
-        $this->nte = $this->getNTE();
+        $this->nte = $this->formatPrice($this->getNTE());
         $this->storeId = $this->getStoreId();
         $address = $this->getAddress();
         $this->addressStreet = $address['street'];
         $this->addressCity = $address['city'];
         $this->addressState = $address['state'];
         $this->addressZipcode = $address['zipcode'];
-        $this->phone = $this->getPhone();
+        $this->phone = $this->formatPhone($this->getPhone());
     }
 
     protected function getTrackingNumber()
     {
-        return $this->dom->find('#wo_number')->innerText;
+        return trim($this->dom->find('#wo_number')->innerText);
     }
 
     protected function getPONumber()
     {
-        return $this->dom->find('#po_number')->innerText;
+        return trim($this->dom->find('#po_number')->innerText);
     }
 
     protected function getScheduledTime()
     {
-        return $this->dom->find('#scheduled_date')->innerText;
+        return trim($this->dom->find('#scheduled_date')->innerText);
     }
 
     protected function getCustomer()
     {
-        return $this->dom->find('#customer')->innerText;
+        return trim($this->dom->find('#customer')->innerText);
     }
 
     protected function getTrade()
     {
-        return $this->dom->find('#trade')->innerText;
+        return trim($this->dom->find('#trade')->innerText);
     }
 
     protected function getNTE()
     {
-        return $this->dom->find('#nte')->innerText;
+        return trim($this->dom->find('#nte')->innerText);
     }
 
     protected function getStoreId()
     {
-        return $this->dom->find('#location_name')->innerText;
+        return trim($this->dom->find('#location_name')->innerText);
     }
 
     protected function getAddress()
@@ -152,7 +159,9 @@ class OrderParser
 }
 
 $parser = new OrderParser();
-$parser->source('wo_for_parse.html');
+$parser->source('wo_for_parse.html')->parse();
+
 echo '<pre>';
-print_r($parser->parse());
+print_r($parser->return());
 echo '</pre>';
+
