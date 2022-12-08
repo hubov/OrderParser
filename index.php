@@ -158,6 +158,49 @@ class OrderParser
     }
 }
 
+class CSVExport
+{
+    protected $header;
+    protected $data;
+    protected $file;
+
+    public function setHeader($header)
+    {
+        $this->header = $header;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    protected function checkHeader()
+    {
+        if(!fgetcsv($this->file)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function addHeader()
+    {
+        if (($this->header !== NULL) && ($this->checkHeader())) {
+            fputcsv($this->file, $this->header);
+        }
+    }
+
+    public function save()
+    {
+        $this->file = fopen('storage/results.csv', 'a+');
+
+        $this->addHeader();
+        fputcsv($this->file, $this->data);
+
+        fclose($this->file);
+    }
+}
+
 $parser = new OrderParser();
 $parser->source('wo_for_parse.html')->parse();
 
@@ -165,3 +208,7 @@ echo '<pre>';
 print_r($parser->return());
 echo '</pre>';
 
+$export = new CSVExport();
+$export->setHeader(array_keys($parser->return()));
+$export->setData($parser->return());
+$export->save();
