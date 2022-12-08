@@ -8,7 +8,6 @@ class ComposerStaticInite42d508c697d8e43bcfe97adf4803f25
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -20,6 +19,10 @@ class ComposerStaticInite42d508c697d8e43bcfe97adf4803f25
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'PHPHtmlParser\\' => 14,
+        ),
+        'O' => 
+        array (
+            'OrderParser\\' => 12,
         ),
         'M' => 
         array (
@@ -42,6 +45,7 @@ class ComposerStaticInite42d508c697d8e43bcfe97adf4803f25
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -49,7 +53,11 @@ class ComposerStaticInite42d508c697d8e43bcfe97adf4803f25
         ),
         'PHPHtmlParser\\' => 
         array (
-            0 => __DIR__ . '/..' . '/paquettg/php-html-parser/src/PHPHtmlParser',
+            0 => __DIR__ . '/..' . '/natlibfi/php-html-parser/src/PHPHtmlParser',
+        ),
+        'OrderParser\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (
