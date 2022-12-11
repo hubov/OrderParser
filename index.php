@@ -19,6 +19,6 @@ print_r($parser->return());
 echo '</pre>';
 
 $export = new CSVExport();
-$export->setHeader(array_keys($parser->return()));
-$export->setData($parser->return());
-$export->save();
+$export->setHeader(array_keys($parser->return()))
+        ->setData($parser->return())
+        ->save();

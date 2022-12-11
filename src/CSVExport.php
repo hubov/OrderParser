@@ -11,11 +11,15 @@ class CSVExport
     public function setHeader($header)
     {
         $this->header = $header;
+
+        return $this;
     }
 
     public function setData($data)
     {
         $this->data = $data;
+
+        return $this;
     }
 
     protected function checkHeader()
@@ -36,7 +40,7 @@ class CSVExport
 
     public function save()
     {
-        $this->file = fopen('storage/results.csv', 'a+');
+        $this->file = fopen('storage/results.csv', 'r+');
 
         $this->addHeader();
         fputcsv($this->file, $this->data);
