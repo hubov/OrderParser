@@ -6,7 +6,13 @@ use OrderParser\OrderParser;
 use OrderParser\CSVExport;
 
 $parser = new OrderParser();
-$parser->source('wo_for_parse.html')->parse();
+if (isset($_GET['file'])) {
+    $file = $_GET['file'];
+} else {
+    $file = 'wo_for_parse.html';
+}
+
+$parser->source($file)->parse();
 
 echo '<pre>';
 print_r($parser->return());
